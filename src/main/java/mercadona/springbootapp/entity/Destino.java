@@ -19,15 +19,15 @@ public class Destino {
     private String name;
 	
 	@Column(name = "cod", nullable = false)
-    private String cod;
+    private Integer cod;
 	 
     public Destino() {
     	super();
 	}
 
-	public Destino(long id, String cod, String destiny) {
+	public Destino(long id, Integer cod, String name) {
         this.id = id;
-        this.name = destiny;
+        this.name = name;
         this.cod = cod;
     }
 
@@ -35,7 +35,7 @@ public class Destino {
         return id;
     }
     
-    public String getCod() {
+    public Integer getCod() {
 		return cod;
 	}
 
@@ -51,7 +51,7 @@ public class Destino {
 		this.name = name;
 	}
 
-	public void setCod(String cod) {
+	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
     
