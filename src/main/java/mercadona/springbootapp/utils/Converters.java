@@ -1,33 +1,37 @@
 package mercadona.springbootapp.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.modelmapper.ModelMapper;
-
-import mercadona.springbootapp.dto.DestinoDTO;
-import mercadona.springbootapp.entity.Destino;
+import org.modelmapper.TypeToken;
 
 public class Converters {
 
 	private static Log log = LogFactory.getLog(Converters.class);
 	
-	public static DestinoDTO destinoEntityToDestinoDTO(Destino dest) {
+	public static ModelMapper modelMapper = new ModelMapper();
+	
+	public static List<Object> lisObjectEntityToListObjectDTO(List<?> listEnt, Object obDestino) {
 		
-		log.info("Convertir objeto entidad Destino a dto Destino");
+		log.info("Convertir lista de objeto entidad a lista de objecto dto");
 		
-		ModelMapper modelMapper = new ModelMapper();
-		DestinoDTO res = modelMapper.map(dest, DestinoDTO.class);
+		List<Object> res = new ArrayList<>();
+		
+		res = modelMapper.map(listEnt,new TypeToken<List<Object>>(){}.getType());
 		
 		return res;
 	}
 	
-	public static Destino destinoDTOToDestinoEntity(DestinoDTO dest) {
+	public static <T> Object objectOrigenToObjectDestino(Object obOrigen, Class<T> obDestino) {
 		
-		log.info("Convertir objeto dto Destino a entidad Destino");
+		log.info("Convertir objeto origen a objeto destino");
 		
-		ModelMapper modelMapper = new ModelMapper();
-		Destino res = modelMapper.map(dest, Destino.class);
+		Object res = modelMapper.map(obOrigen, obDestino);
 		
 		return res;
 	}
+	
 }

@@ -54,5 +54,5 @@ public class Destino {
 	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
-    
+
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import mercadona.springbootapp.dto.AllDestinoResponse;
 import mercadona.springbootapp.dto.DestinoDTO;
 import mercadona.springbootapp.entity.Destino;
 import mercadona.springbootapp.exception.RestException;
@@ -25,6 +26,43 @@ public class DestinoService implements IDestinoService{
 	
 	@Autowired
 	private DestinoRepository destinoRepo;
+	
+	@Override
+	public AllDestinoResponse getAllDestino() throws IOException, RestException {
+		
+		log.info("Access to getAllDestino Service");
+		AllDestinoResponse res = new AllDestinoResponse();
+		
+		List<Destino> listEntity = new ArrayList<>();
+		
+		log.info("Llamada al repository para obtener datos de Base de Datos");
+		
+		try {
+			listEntity = destinoRepo.findAll();
+			
+			List<DestinoDTO> listDto = new ArrayList<>();
+			
+			if ( listEntity.isEmpty() ) {
+				return null;
+			} else {
+				
+				log.info("Convierte lista de entidades Destino obtenidas a lista de DTOs Destino a devolver por el servicio");
+				
+				List<Object> listaObj = Converters.lisObjectEntityToListObjectDTO(listEntity, DestinoDTO.class);
+						
+				listDto = (List<DestinoDTO>)(Object) listaObj;
+				
+				res.setDestinos(listDto);
+				res.setNumDestinos(listDto.size());
+			}
+			
+		} catch (Exception e) {
+			log.info("No se ha podido obtener correctamente datos de BBDD");
+			throw new RestException("No se ha podido encontrar Destino en BBDD", "500", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return res;
+	}
 	
 	@Override
 	public DestinoDTO getDestinoByCod(Integer cod) throws IOException, RestException {
@@ -43,7 +81,7 @@ public class DestinoService implements IDestinoService{
 			if ( list.isEmpty() || list.get(0) ==  null) {
 				return null;
 			}else {
-				res = Converters.destinoEntityToDestinoDTO(list.get(0));
+				res = (DestinoDTO) Converters.objectOrigenToObjectDestino(list.get(0), DestinoDTO.class);
 			}
 			
 		} catch (Exception e) {
@@ -62,15 +100,18 @@ public class DestinoService implements IDestinoService{
 		
 		try {
 			log.info("Convierte objeto destino dto a entity");
-			Destino destinoEntity = Converters.destinoDTOToDestinoEntity(destino);
+			Destino destinoEntity = (Destino) Converters.objectOrigenToObjectDestino(destino, Destino.class);
 			
-			log.info("Llamada al repository para crear objeto en Base de Datos");
-			Destino entity = destinoRepo.save(destinoEntity);
+			log.info("Comprueba si existe ya un objeto con el codigo indicado");
+			List<Destino> entity = destinoRepo.findByCod(destino.getCod());
 			
-			if ( entity ==  null) {
-				return null;
-			}else {
-				res = Converters.destinoEntityToDestinoDTO(entity);
+			if (entity.isEmpty() ||entity.get(0) == null ) {
+				log.info("Llamada al repository para crear objeto en Base de Datos");
+				Destino entitySaved = destinoRepo.save(destinoEntity);
+				res = (DestinoDTO) Converters.objectOrigenToObjectDestino(entitySaved, DestinoDTO.class);
+			} else {
+				log.info("No se ha podido crear correctamente datos en BBDD, codigo existente");
+				throw new RestException("No se ha podido crear Destino en BBDD, codigo ya existente", "500", HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			
 		} catch (Exception e) {
@@ -89,7 +130,7 @@ public class DestinoService implements IDestinoService{
 		
 		try {
 			log.info("Convierte objeto destino dto a entity");
-			Destino destinoEntity = Converters.destinoDTOToDestinoEntity(destino);
+			Destino destinoEntity = (Destino) Converters.objectOrigenToObjectDestino(destino, Destino.class);
 			
 			log.info("Llamada al repository buscar objeto a actualizar");
 			List<Destino> listaDest = new ArrayList<>();
@@ -113,7 +154,7 @@ public class DestinoService implements IDestinoService{
 			if ( destinoEnt ==  null) {
 				return null;
 			}else {
-				res = Converters.destinoEntityToDestinoDTO(destinoEnt);
+				res = (DestinoDTO) Converters.objectOrigenToObjectDestino(destinoEnt, DestinoDTO.class );
 			}
 			
 		} catch (Exception e) {
@@ -131,7 +172,7 @@ public class DestinoService implements IDestinoService{
 		
 		try {
 			log.info("Convierte objeto destino dto a entity");
-			Destino destinoEntity = Converters.destinoDTOToDestinoEntity(destino);
+			Destino destinoEntity = (Destino) Converters.objectOrigenToObjectDestino(destino, Destino.class);
 			
 			log.info("Llamada al repository buscar objeto a borrar");
 			List<Destino> listaDest = new ArrayList<>();

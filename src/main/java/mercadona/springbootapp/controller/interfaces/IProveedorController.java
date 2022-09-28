@@ -13,15 +13,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import mercadona.springbootapp.common.StandarizedApiExceptionResponse;
-import mercadona.springbootapp.dto.AllDestinoResponse;
-import mercadona.springbootapp.dto.DestinoDTO;
+import mercadona.springbootapp.dto.AllProveedorResponse;
+import mercadona.springbootapp.dto.ProveedorDTO;
 import mercadona.springbootapp.exception.RestException;
 
-public interface IDestinoController {
-	
-	@Operation(summary = "getDestinoByCod", description = "Get a destino by cod", tags={ "Destino" })
+public interface IProveedorController {
+
+	@Operation(summary = "getProveedorByCod", description = "Get a proveedor by cod", tags={ "Proveedor" })
 	@ApiResponses(value = { 
-			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DestinoDTO.class))),
+			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProveedorDTO.class))),
             
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
@@ -30,13 +30,13 @@ public interface IDestinoController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
             @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))) })
-	@RequestMapping(value = { "/getDestinoByCod" }, method = { RequestMethod.GET })
-	ResponseEntity<DestinoDTO> getDestinoByCod(@RequestHeader("access-token") String token, 
+	@RequestMapping(value = { "/getProveedorByCod" }, method = { RequestMethod.GET })
+	ResponseEntity<ProveedorDTO> getProveedorByCod(@RequestHeader("access-token") String token, 
 			@RequestParam(name = "cod", required = true) Integer cod) throws RestException;
 	
-	@Operation(summary = "getAllDestino", description = "Get all destino", tags={ "Destino" })
+	@Operation(summary = "getAllProveedor", description = "Get all proveedor", tags={ "Proveedor" })
 	@ApiResponses(value = { 
-			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AllDestinoResponse.class))),
+			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AllProveedorResponse.class))),
             
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
@@ -45,12 +45,12 @@ public interface IDestinoController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
             @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))) })
-	@RequestMapping(value = { "/getAllDestino" }, method = { RequestMethod.GET })
-	ResponseEntity<AllDestinoResponse> getAllDestino(@RequestHeader("access-token") String token) throws RestException;
+	@RequestMapping(value = { "/getAllProveedor" }, method = { RequestMethod.GET })
+	ResponseEntity<AllProveedorResponse> getAllProveedor(@RequestHeader("access-token") String token) throws RestException;
 	
-	@Operation(summary = "createDestino", description = "Create a destino entity", tags={ "Destino" })
+	@Operation(summary = "createProveedor", description = "Create a proveedor entity", tags={ "Proveedor" })
 	@ApiResponses(value = { 
-			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DestinoDTO.class))),
+			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProveedorDTO.class))),
             
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
@@ -59,13 +59,13 @@ public interface IDestinoController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
             @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))) })
-	@RequestMapping(value = { "/createDestino" }, method = { RequestMethod.POST })
-	ResponseEntity<DestinoDTO> createDestino(@RequestHeader("access-token") String token, 
-			@RequestBody DestinoDTO request) throws RestException;
+	@RequestMapping(value = { "/createProveedor" }, method = { RequestMethod.POST })
+	ResponseEntity<ProveedorDTO> createProveedor(@RequestHeader("access-token") String token, 
+			@RequestBody ProveedorDTO request) throws RestException;
 	
-	@Operation(summary = "updateDestino", description = "update destino entity", tags={ "Destino" })
+	@Operation(summary = "updateDestino", description = "update proveedor entity", tags={ "Proveedor" })
 	@ApiResponses(value = { 
-			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DestinoDTO.class))),
+			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProveedorDTO.class))),
             
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
@@ -74,13 +74,13 @@ public interface IDestinoController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
             @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))) })
-	@RequestMapping(value = { "/updateDestino" }, method = { RequestMethod.PUT })
-	ResponseEntity<DestinoDTO> updateDestino(@RequestHeader("access-token") String token, 
-			@RequestBody DestinoDTO request) throws RestException;
+	@RequestMapping(value = { "/updateProveedor" }, method = { RequestMethod.PUT })
+	ResponseEntity<ProveedorDTO> updateProveedor(@RequestHeader("access-token") String token, 
+			@RequestBody ProveedorDTO request) throws RestException;
 	
-	@Operation(summary = "deleteDestino", description = "Delete destino entity", tags={ "Destino" })
+	@Operation(summary = "deleteProveedor", description = "Delete proveedor entity", tags={ "Proveedor" })
 	@ApiResponses(value = { 
-			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DestinoDTO.class))),
+			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProveedorDTO.class))),
             
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
@@ -89,9 +89,9 @@ public interface IDestinoController {
             @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
             @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))) })
-	@RequestMapping(value = { "/deleteDestino" }, method = { RequestMethod.DELETE })
-	ResponseEntity<DestinoDTO> deleteDestino(@RequestHeader("access-token") String token, 
-			@RequestBody DestinoDTO request) throws RestException;
+	@RequestMapping(value = { "/deleteProveedor" }, method = { RequestMethod.DELETE })
+	ResponseEntity<ProveedorDTO> deleteProveedor(@RequestHeader("access-token") String token, 
+			@RequestBody ProveedorDTO request) throws RestException;
 	
-
+	
 }

@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mercadona.springbootapp.controller.interfaces.IDestinoController;
+import mercadona.springbootapp.dto.AllDestinoResponse;
 import mercadona.springbootapp.dto.DestinoDTO;
 import mercadona.springbootapp.exception.RestException;
 import mercadona.springbootapp.service.interfaces.IDestinoService;
 
-//@OpenAPIDefinition(servers = { @Server(url = "http://localhost:7001") }, info = @Info(title = "Sample Spring Boot API", version = "v1", description = "A demo project using Spring Boot with Swagger-UI enabled", license = @License(name = "MIT License", url = "https://github.com/bchen04/springboot-swagger-rest-api/blob/master/LICENSE"), contact = @Contact(url = "https://www.linkedin.com/in/bchen04/", name = "Ben Chen")))
 @RestController
 @RequestMapping("/destino")
 public class DestinoController implements IDestinoController {
@@ -22,6 +22,47 @@ public class DestinoController implements IDestinoController {
 	
 	@Autowired
 	IDestinoService destinoService;
+    
+	/**
+	 * Método para obtener All Destinos
+	 * 
+	 * @return code ResponseEntity<AllDestinoResponse>
+	 * @throws RestException 
+	 */
+    public ResponseEntity<AllDestinoResponse> getAllDestino(String token) throws RestException {
+    	
+    	log.info("Access to AllDestino controller");
+      
+    	long startTime = System.nanoTime();
+      
+		ResponseEntity<AllDestinoResponse> response = null;
+		
+		try {
+			
+			final AllDestinoResponse res = destinoService.getAllDestino();
+			
+			if (res != null) {
+				response = ResponseEntity.ok(res);
+				
+			} else {
+				log.error("No se ha podido obtener correctamente los datos del servicio REST AllDestino");
+				throw new RestException("No se ha podido encontrar Destinos", "500", HttpStatus.NOT_FOUND);
+			}
+			
+		} catch (Exception e) {
+			
+			log.error("No se ha podido obtener correctamente los datos del servicio REST AllDestino");
+			throw new RestException("No se ha podido encontrar Destinos", "500", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime) / 1000000L;
+		
+		log.info("The request to AllDestinoResponse() took "
+				+ duration + " ms.");
+		return response;
+		
+  }
     
 	/**
 	 * Método para obtener DestinoDTO  by codigo
@@ -90,13 +131,13 @@ public class DestinoController implements IDestinoController {
 				
 			} else {
 				log.error("No se ha podido obtener correctamente los datos del servicio REST createDestino");
-				throw new RestException("No se ha podido encontrar Destino para el valor indicado", "404", HttpStatus.NOT_FOUND);
+				throw new RestException("No se ha podido crear Destino para el valor indicado", "404", HttpStatus.NOT_FOUND);
 			}
 			
 		} catch (Exception e) {
 			
 			log.error("No se ha podido obtener correctamente los datos del servicio REST createDestino");
-			throw new RestException("No se ha podido encontrar Destino para el valor indicado", "500", HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new RestException("No se ha podido crear Destino para el valor indicado", "500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		long endTime = System.nanoTime();
