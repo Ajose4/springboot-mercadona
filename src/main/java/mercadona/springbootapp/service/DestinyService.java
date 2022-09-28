@@ -10,37 +10,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import mercadona.springbootapp.dto.AllDestinoResponse;
-import mercadona.springbootapp.dto.DestinoDTO;
-import mercadona.springbootapp.entity.Destino;
+import mercadona.springbootapp.dto.AllDestinyResponse;
+import mercadona.springbootapp.dto.DestinyDTO;
+import mercadona.springbootapp.entity.Destiny;
 import mercadona.springbootapp.exception.RestException;
-import mercadona.springbootapp.repository.DestinoRepository;
-import mercadona.springbootapp.service.interfaces.IDestinoService;
+import mercadona.springbootapp.repository.DestinyRepository;
+import mercadona.springbootapp.service.interfaces.IDestinyService;
 import mercadona.springbootapp.utils.Converters;
 
 @Service
-public class DestinoService implements IDestinoService{
+public class DestinyService implements IDestinyService{
 
 	/** The log */
-	private static Log log = LogFactory.getLog(DestinoService.class);
+	private static Log log = LogFactory.getLog(DestinyService.class);
 	
 	@Autowired
-	private DestinoRepository destinoRepo;
+	private DestinyRepository destinoRepo;
 	
 	@Override
-	public AllDestinoResponse getAllDestino() throws IOException, RestException {
+	public AllDestinyResponse getAllDestiny() throws IOException, RestException {
 		
 		log.info("Access to getAllDestino Service");
-		AllDestinoResponse res = new AllDestinoResponse();
+		AllDestinyResponse res = new AllDestinyResponse();
 		
-		List<Destino> listEntity = new ArrayList<>();
+		List<Destiny> listEntity = new ArrayList<>();
 		
 		log.info("Llamada al repository para obtener datos de Base de Datos");
 		
 		try {
 			listEntity = destinoRepo.findAll();
 			
-			List<DestinoDTO> listDto = new ArrayList<>();
+			List<DestinyDTO> listDto = new ArrayList<>();
 			
 			if ( listEntity.isEmpty() ) {
 				return null;
@@ -48,9 +48,9 @@ public class DestinoService implements IDestinoService{
 				
 				log.info("Convierte lista de entidades Destino obtenidas a lista de DTOs Destino a devolver por el servicio");
 				
-				List<Object> listaObj = Converters.lisObjectEntityToListObjectDTO(listEntity, DestinoDTO.class);
+				List<Object> listaObj = Converters.lisObjectEntityToListObjectDTO(listEntity, DestinyDTO.class);
 						
-				listDto = (List<DestinoDTO>)(Object) listaObj;
+				listDto = (List<DestinyDTO>)(Object) listaObj;
 				
 				res.setDestinos(listDto);
 				res.setNumDestinos(listDto.size());
@@ -65,23 +65,23 @@ public class DestinoService implements IDestinoService{
 	}
 	
 	@Override
-	public DestinoDTO getDestinoByCod(Integer cod) throws IOException, RestException {
+	public DestinyDTO getDestinyByCod(Integer cod) throws IOException, RestException {
 		
 		log.info("Access to getDestinoByCod Service");
-		DestinoDTO res = null;
+		DestinyDTO res = null;
 		
-		List<Destino> list = new ArrayList<>();
+		List<Destiny> list = new ArrayList<>();
 		
 		log.info("Llamada al repository para obtener datos de Base de Datos");
 		
 		try {
 			list = destinoRepo.findByCod(cod);
-			res = new DestinoDTO();
+			res = new DestinyDTO();
 			
 			if ( list.isEmpty() || list.get(0) ==  null) {
 				return null;
 			}else {
-				res = (DestinoDTO) Converters.objectOrigenToObjectDestino(list.get(0), DestinoDTO.class);
+				res = (DestinyDTO) Converters.objectOrigenToObjectDestino(list.get(0), DestinyDTO.class);
 			}
 			
 		} catch (Exception e) {
@@ -93,22 +93,22 @@ public class DestinoService implements IDestinoService{
 	}
 
 	@Override
-	public DestinoDTO createDestino(DestinoDTO destino) throws RestException {
+	public DestinyDTO createDestiny(DestinyDTO destino) throws RestException {
 		
 		log.info("Access to createDestino Service");
-		DestinoDTO res = null;
+		DestinyDTO res = null;
 		
 		try {
 			log.info("Convierte objeto destino dto a entity");
-			Destino destinoEntity = (Destino) Converters.objectOrigenToObjectDestino(destino, Destino.class);
+			Destiny destinoEntity = (Destiny) Converters.objectOrigenToObjectDestino(destino, Destiny.class);
 			
 			log.info("Comprueba si existe ya un objeto con el codigo indicado");
-			List<Destino> entity = destinoRepo.findByCod(destino.getCod());
+			List<Destiny> entity = destinoRepo.findByCod(destino.getCod());
 			
 			if (entity.isEmpty() ||entity.get(0) == null ) {
 				log.info("Llamada al repository para crear objeto en Base de Datos");
-				Destino entitySaved = destinoRepo.save(destinoEntity);
-				res = (DestinoDTO) Converters.objectOrigenToObjectDestino(entitySaved, DestinoDTO.class);
+				Destiny entitySaved = destinoRepo.save(destinoEntity);
+				res = (DestinyDTO) Converters.objectOrigenToObjectDestino(entitySaved, DestinyDTO.class);
 			} else {
 				log.info("No se ha podido crear correctamente datos en BBDD, codigo existente");
 				throw new RestException("No se ha podido crear Destino en BBDD, codigo ya existente", "500", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -123,21 +123,21 @@ public class DestinoService implements IDestinoService{
 	}
 	
 	@Override
-	public DestinoDTO updateDestino(DestinoDTO destino) throws RestException {
+	public DestinyDTO updateDestiny(DestinyDTO destino) throws RestException {
 		
 		log.info("Access to updateDestino Service");
-		DestinoDTO res = null;
+		DestinyDTO res = null;
 		
 		try {
 			log.info("Convierte objeto destino dto a entity");
-			Destino destinoEntity = (Destino) Converters.objectOrigenToObjectDestino(destino, Destino.class);
+			Destiny destinoEntity = (Destiny) Converters.objectOrigenToObjectDestino(destino, Destiny.class);
 			
 			log.info("Llamada al repository buscar objeto a actualizar");
-			List<Destino> listaDest = new ArrayList<>();
+			List<Destiny> listaDest = new ArrayList<>();
 			
 			listaDest = destinoRepo.findByCod(destino.getCod());
 			
-			Destino destinoEnt = null;
+			Destiny destinoEnt = null;
 			
 			if (listaDest.isEmpty() || listaDest.get(0)==null) {
 				log.info("No existen registro con cod: " + destino.getCod() + "para actualizar");
@@ -154,7 +154,7 @@ public class DestinoService implements IDestinoService{
 			if ( destinoEnt ==  null) {
 				return null;
 			}else {
-				res = (DestinoDTO) Converters.objectOrigenToObjectDestino(destinoEnt, DestinoDTO.class );
+				res = (DestinyDTO) Converters.objectOrigenToObjectDestino(destinoEnt, DestinyDTO.class );
 			}
 			
 		} catch (Exception e) {
@@ -166,16 +166,16 @@ public class DestinoService implements IDestinoService{
 	}
 
 	@Override
-	public DestinoDTO deleteDestino(DestinoDTO destino) throws RestException {
+	public DestinyDTO deleteDestiny(DestinyDTO destino) throws RestException {
 		log.info("Access to deleteDestino Service");
-		DestinoDTO res = null;
+		DestinyDTO res = null;
 		
 		try {
 			log.info("Convierte objeto destino dto a entity");
-			Destino destinoEntity = (Destino) Converters.objectOrigenToObjectDestino(destino, Destino.class);
+			Destiny destinoEntity = (Destiny) Converters.objectOrigenToObjectDestino(destino, Destiny.class);
 			
 			log.info("Llamada al repository buscar objeto a borrar");
-			List<Destino> listaDest = new ArrayList<>();
+			List<Destiny> listaDest = new ArrayList<>();
 			
 			listaDest = destinoRepo.findByCod(destino.getCod());
 			

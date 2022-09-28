@@ -8,24 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PROVEEDOR")
-public class Proveedor {
-	
+@Table(name = "DESTINY")
+public class Destiny {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
-	@Column(name = "cod", nullable = false)
-    private Integer cod;
-	
 	@Column(name = "name", nullable = false)
     private String name;
-
-    public Proveedor() {
+	
+	@Column(name = "cod", nullable = false)
+    private Integer cod;
+	 
+    public Destiny() {
     	super();
 	}
-   
-    public Proveedor(long id, Integer cod, String name) {
+
+	public Destiny(long id, Integer cod, String name) {
         this.id = id;
         this.name = name;
         this.cod = cod;
@@ -34,14 +34,15 @@ public class Proveedor {
     public long getId() {
         return id;
     }
-
+    
     public Integer getCod() {
 		return cod;
 	}
 
-	public String getName() {
+    public String getName() {
         return name;
     }
+
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -53,4 +54,5 @@ public class Proveedor {
 	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
+
 }

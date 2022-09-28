@@ -8,24 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DESTINO")
-public class Destino {
+@Table(name = "PRODUCTO")
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
-	@Column(name = "name", nullable = false)
-    private String name;
-	
 	@Column(name = "cod", nullable = false)
     private Integer cod;
-	 
-    public Destino() {
+	
+	@Column(name = "name", nullable = false)
+    private String name;
+
+    public Product() {
     	super();
 	}
-
-	public Destino(long id, Integer cod, String name) {
+	 
+    public Product(long id, Integer cod, String name) {
         this.id = id;
         this.name = name;
         this.cod = cod;
@@ -34,12 +34,12 @@ public class Destino {
     public long getId() {
         return id;
     }
-    
+
     public Integer getCod() {
 		return cod;
 	}
 
-    public String getName() {
+	public String getName() {
         return name;
     }
 
@@ -47,12 +47,12 @@ public class Destino {
 		this.id = id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

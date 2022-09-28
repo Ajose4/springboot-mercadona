@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mercadona.springbootapp.controller.interfaces.IUtilsController;
-import mercadona.springbootapp.dto.AllProveedorResponse;
-import mercadona.springbootapp.dto.DestinoDTO;
-import mercadona.springbootapp.dto.DetallesByEANResponseDTO;
-import mercadona.springbootapp.dto.ProductoDTO;
-import mercadona.springbootapp.dto.ProveedorDTO;
+import mercadona.springbootapp.dto.DestinyDTO;
+import mercadona.springbootapp.dto.DetailsByEANResponseDTO;
+import mercadona.springbootapp.dto.ProductDTO;
+import mercadona.springbootapp.dto.ProviderDTO;
 import mercadona.springbootapp.exception.RestException;
-import mercadona.springbootapp.service.interfaces.IDestinoService;
-import mercadona.springbootapp.service.interfaces.IProductoService;
-import mercadona.springbootapp.service.interfaces.IProveedorService;
+import mercadona.springbootapp.service.interfaces.IDestinyService;
+import mercadona.springbootapp.service.interfaces.IProductService;
+import mercadona.springbootapp.service.interfaces.IProviderService;
 import mercadona.springbootapp.utils.Utilidades;
 
 @RestController
@@ -27,13 +26,13 @@ public class UtilsController implements IUtilsController {
 private static Log log = LogFactory.getLog(UtilsController.class);
 
 	@Autowired
-	IProveedorService proveedorService;
+	IProviderService providerService;
 	
 	@Autowired
-	IProductoService productoService;
+	IProductService productService;
 	
 	@Autowired
-	IDestinoService destinoService;
+	IDestinyService destinyService;
 	
 	/**
 	 * Método para obtener detalles by ean
@@ -42,13 +41,13 @@ private static Log log = LogFactory.getLog(UtilsController.class);
 	 * @throws RestException 
 	 */
 	@Override
-	public ResponseEntity<DetallesByEANResponseDTO> getDetallesByEAN(String token, String ean) throws RestException {
+	public ResponseEntity<DetailsByEANResponseDTO> getDetailsByEAN(String token, String ean) throws RestException {
 		
 		log.info("Access to getDetallesByEAN controller");
 	  
 		long startTime = System.nanoTime();
 	  
-		ResponseEntity<DetallesByEANResponseDTO> response = null;
+		ResponseEntity<DetailsByEANResponseDTO> response = null;
 		
 		try {
 			
@@ -67,14 +66,14 @@ private static Log log = LogFactory.getLog(UtilsController.class);
 			
 			}
 			
-			final DetallesByEANResponseDTO res = new DetallesByEANResponseDTO();
+			final DetailsByEANResponseDTO res = new DetailsByEANResponseDTO();
 
 			
 			String destino = ean.substring(12);
 			String proveedor = ean.substring(0, 7);
 			String producto = ean.substring(7,12);
 			
-			ProductoDTO productoDto = productoService.getProductoByCod(Integer.valueOf(producto));
+			ProductDTO productoDto = productService.getProductByCod(Integer.valueOf(producto));
 			
 			if( productoDto==null ) {
 				log.error("No existe producto con codigo: " + producto + " por favor, compruebe el número EAN introducido.");
@@ -84,7 +83,7 @@ private static Log log = LogFactory.getLog(UtilsController.class);
 				res.setProducto(productoDto);
 			}
 			
-			ProveedorDTO proveedorDto = proveedorService.getProveedorByCod(Integer.valueOf(proveedor));
+			ProviderDTO proveedorDto = providerService.getProviderByCod(Integer.valueOf(proveedor));
 			
 			if( proveedorDto==null ) {
 				log.error("No existe producto con codigo: " + proveedor + " por favor, compruebe el número EAN introducido.");
@@ -94,7 +93,7 @@ private static Log log = LogFactory.getLog(UtilsController.class);
 				res.setProveedor(proveedorDto);
 			}
 			
-			DestinoDTO destinoDto = destinoService.getDestinoByCod(Integer.valueOf(destino));
+			DestinyDTO destinoDto = destinyService.getDestinyByCod(Integer.valueOf(destino));
 			
 			if( destinoDto==null ) {
 				log.error("No existe producto con codigo: " + destino + " por favor, compruebe el número EAN introducido.");
@@ -116,7 +115,7 @@ private static Log log = LogFactory.getLog(UtilsController.class);
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime) / 1000000L;
 		
-		log.info("The request to getDetallesByEAN("+ean+") took "
+		log.info("The request to getDetailsByEAN("+ean+") took "
 				+ duration + " ms.");
 		return response;
 		

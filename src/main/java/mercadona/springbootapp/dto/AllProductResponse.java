@@ -2,23 +2,23 @@ package mercadona.springbootapp.dto;
 
 import java.util.List;
 
-public class AllProductoResponse {
+public class AllProductResponse {
 
 	/** productos */
-	private List<ProductoDTO> productos;
+	private List<ProductDTO> productos;
 	
 	/** numProductos */
 	private Integer numProductos;
 
-	public AllProductoResponse() {
+	public AllProductResponse() {
 		super();
 	}
 
-	public List<ProductoDTO> getProductos() {
+	public List<ProductDTO> getProductos() {
 		return productos;
 	}
 
-	public void setProductos(List<ProductoDTO> productos) {
+	public void setProductos(List<ProductDTO> productos) {
 		this.productos = productos;
 	}
 

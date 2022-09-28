@@ -12,14 +12,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import mercadona.springbootapp.common.StandarizedApiExceptionResponse;
-import mercadona.springbootapp.dto.DetallesByEANResponseDTO;
+import mercadona.springbootapp.dto.DetailsByEANResponseDTO;
 import mercadona.springbootapp.exception.RestException;
 
 public interface IUtilsController {
 	
 	@Operation(summary = "detallesByEAN", description = "Get detalles by EAN", tags={ "Utils" })
 	@ApiResponses(value = { 
-			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetallesByEANResponseDTO.class))),
+			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DetailsByEANResponseDTO.class))),
             
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))),
             
@@ -29,7 +29,7 @@ public interface IUtilsController {
             
             @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = StandarizedApiExceptionResponse.class))) })
 	@RequestMapping(value = { "/detallesByEAN" }, method = { RequestMethod.GET })
-	ResponseEntity<DetallesByEANResponseDTO> getDetallesByEAN(@RequestHeader("access-token") String token, 
+	ResponseEntity<DetailsByEANResponseDTO> getDetailsByEAN(@RequestHeader("access-token") String token, 
 			@RequestParam(name = "ean", required = true) String ean) throws RestException;
 
 }
