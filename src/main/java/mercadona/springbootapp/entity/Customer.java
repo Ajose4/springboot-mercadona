@@ -1,4 +1,4 @@
-package com.example.restapi.springbootapp.dto;
+package mercadona.springbootapp.entity;
 
 public class Customer {
 

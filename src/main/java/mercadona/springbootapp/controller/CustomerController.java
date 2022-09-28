@@ -1,15 +1,16 @@
-package com.example.restapi.springbootapp.controller.v1;
+package mercadona.springbootapp.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.example.restapi.springbootapp.dto.Customer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import mercadona.springbootapp.entity.Customer;
 
 @RestController
 public class CustomerController {
