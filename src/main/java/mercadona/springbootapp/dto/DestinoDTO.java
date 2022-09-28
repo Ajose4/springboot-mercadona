@@ -1,25 +1,25 @@
 package mercadona.springbootapp.dto;
 
-public class DestinoResponseDTO {
+public class DestinoDTO {
 
 	/** cod */
-	private String cod;
+	private Integer cod;
 	
 	/** name */
 	private String name;
 	
-	public DestinoResponseDTO() {
+	public DestinoDTO() {
 		super();
 	}
 	
-	public String getCod() {
+	public Integer getCod() {
 		return cod;
 	}
 	public String getName() {
 		return name;
 	}
 
-	public void setCod(String cod) {
+	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
 

@@ -8,6 +8,6 @@ import mercadona.springbootapp.entity.Destino;
 
 public interface DestinoRepository extends JpaRepository<Destino, Long>{
 	
-	List<Destino> findByCod (String cod);
+	List<Destino> findByCod (Integer cod);
 
 }
