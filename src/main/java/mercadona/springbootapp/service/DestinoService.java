@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import mercadona.springbootapp.dto.AllDestinoResponse;
 import mercadona.springbootapp.dto.DestinoDTO;
 import mercadona.springbootapp.entity.Destino;
 import mercadona.springbootapp.exception.RestException;
@@ -25,6 +26,40 @@ public class DestinoService implements IDestinoService{
 	
 	@Autowired
 	private DestinoRepository destinoRepo;
+	
+	@Override
+	public AllDestinoResponse getAllDestino() throws IOException, RestException {
+		
+		log.info("Access to getAllDestino Service");
+		AllDestinoResponse res = new AllDestinoResponse();
+		
+		List<Destino> listEntity = new ArrayList<>();
+		
+		log.info("Llamada al repository para obtener datos de Base de Datos");
+		
+		try {
+			listEntity = destinoRepo.findAll();
+			
+			List<DestinoDTO> listDto = new ArrayList<>();
+			
+			if ( listEntity.isEmpty() ) {
+				return null;
+			} else {
+				
+				log.info("Convierte lista de entidades Destino obtenidas a lista de DTOs Destino a devolver por el servicio");
+				listDto = Converters.listDestinoEntityToListDestinoDTO(listEntity);
+				
+				res.setDestinos(listDto);
+				res.setNumDestinos(listDto.size());
+			}
+			
+		} catch (Exception e) {
+			log.info("No se ha podido obtener correctamente datos de BBDD");
+			throw new RestException("No se ha podido encontrar Destino en BBDD", "500", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return res;
+	}
 	
 	@Override
 	public DestinoDTO getDestinoByCod(Integer cod) throws IOException, RestException {
