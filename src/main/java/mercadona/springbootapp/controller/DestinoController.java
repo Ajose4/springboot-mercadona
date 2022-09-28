@@ -132,13 +132,13 @@ public class DestinoController implements IDestinoController {
 				
 			} else {
 				log.error("No se ha podido obtener correctamente los datos del servicio REST createDestino");
-				throw new RestException("No se ha podido encontrar Destino para el valor indicado", "404", HttpStatus.NOT_FOUND);
+				throw new RestException("No se ha podido crear Destino para el valor indicado", "404", HttpStatus.NOT_FOUND);
 			}
 			
 		} catch (Exception e) {
 			
 			log.error("No se ha podido obtener correctamente los datos del servicio REST createDestino");
-			throw new RestException("No se ha podido encontrar Destino para el valor indicado", "500", HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new RestException("No se ha podido crear Destino para el valor indicado", "500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		long endTime = System.nanoTime();

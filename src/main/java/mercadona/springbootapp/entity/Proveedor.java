@@ -5,21 +5,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "PROVEEDOR")
 public class Proveedor {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final long id;
+    private long id;
 	
 	@Column(name = "cod", nullable = false)
-    private final String cod;
+    private Integer cod;
 	
 	@Column(name = "name", nullable = false)
-    private final String name;
+    private String name;
 
-    public Proveedor(long id, String cod, String name) {
+    public Proveedor() {
+    	super();
+	}
+   
+    public Proveedor(long id, Integer cod, String name) {
         this.id = id;
         this.name = name;
         this.cod = cod;
@@ -29,12 +35,22 @@ public class Proveedor {
         return id;
     }
 
-    public String getCod() {
+    public Integer getCod() {
 		return cod;
 	}
 
 	public String getName() {
         return name;
     }
+	public void setId(long id) {
+		this.id = id;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setCod(Integer cod) {
+		this.cod = cod;
+	}
 }

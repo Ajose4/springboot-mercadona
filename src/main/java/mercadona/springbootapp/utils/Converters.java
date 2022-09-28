@@ -8,41 +8,38 @@ import org.apache.commons.logging.LogFactory;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 
-import mercadona.springbootapp.dto.DestinoDTO;
-import mercadona.springbootapp.entity.Destino;
-
 public class Converters {
 
 	private static Log log = LogFactory.getLog(Converters.class);
 	
 	public static ModelMapper modelMapper = new ModelMapper();
 	
-	public static List<DestinoDTO> listDestinoEntityToListDestinoDTO(List<Destino> listEnt) {
+	public static List<Object> lisObjectEntityToListObjectDTO(List<?> listEnt, Object obDestino) {
 		
-		log.info("Convertir lista de objeto entidad Destino a lista de Destino dto");
+		log.info("Convertir lista de objeto entidad a lista de objecto dto");
 		
-		List<DestinoDTO> res = new ArrayList<DestinoDTO>();
+		List<Object> res = new ArrayList<>();
 		
-		res = modelMapper.map(listEnt,new TypeToken<List<DestinoDTO>>(){}.getType());
-		
-		return res;
-	}
-	
-	public static DestinoDTO destinoEntityToDestinoDTO(Destino dest) {
-		
-		log.info("Convertir objeto entidad Destino a dto Destino");
-		
-		DestinoDTO res = modelMapper.map(dest, DestinoDTO.class);
+		res = modelMapper.map(listEnt,new TypeToken<List<Object>>(){}.getType());
 		
 		return res;
 	}
 	
-	public static Destino destinoDTOToDestinoEntity(DestinoDTO dest) {
+	public static <T> Object objectOrigenToObjectDestino(Object obOrigen, Class<T> obDestino) {
 		
-		log.info("Convertir objeto dto Destino a entidad Destino");
+		log.info("Convertir objeto origen a objeto destino");
 		
-		Destino res = modelMapper.map(dest, Destino.class);
+		Object res = modelMapper.map(obOrigen, obDestino);
 		
 		return res;
 	}
+	
+//	public static Destino destinoDTOToDestinoEntity(Object obOrigen, Object obDestino) {
+//		
+//		log.info("Convertir objeto dto a objeto entidad");
+//		
+//		Destino res = modelMapper.map(dest, Destino.class);
+//		
+//		return res;
+//	}
 }
