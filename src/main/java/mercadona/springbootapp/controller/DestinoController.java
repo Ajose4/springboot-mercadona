@@ -14,7 +14,6 @@ import mercadona.springbootapp.dto.DestinoDTO;
 import mercadona.springbootapp.exception.RestException;
 import mercadona.springbootapp.service.interfaces.IDestinoService;
 
-//@OpenAPIDefinition(servers = { @Server(url = "http://localhost:7001") }, info = @Info(title = "Sample Spring Boot API", version = "v1", description = "A demo project using Spring Boot with Swagger-UI enabled", license = @License(name = "MIT License", url = "https://github.com/bchen04/springboot-swagger-rest-api/blob/master/LICENSE"), contact = @Contact(url = "https://www.linkedin.com/in/bchen04/", name = "Ben Chen")))
 @RestController
 @RequestMapping("/destino")
 public class DestinoController implements IDestinoController {

@@ -34,12 +34,4 @@ public class Converters {
 		return res;
 	}
 	
-//	public static Destino destinoDTOToDestinoEntity(Object obOrigen, Object obDestino) {
-//		
-//		log.info("Convertir objeto dto a objeto entidad");
-//		
-//		Destino res = modelMapper.map(dest, Destino.class);
-//		
-//		return res;
-//	}
 }
