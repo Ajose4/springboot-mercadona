@@ -1,6 +1,6 @@
 package mercadona.springbootapp.dto;
 
-public class ProductoDTO {
+public class DestinyDTO {
 
 	/** cod */
 	private Integer cod;
@@ -8,7 +8,7 @@ public class ProductoDTO {
 	/** name */
 	private String name;
 	
-	public ProductoDTO() {
+	public DestinyDTO() {
 		super();
 	}
 	
@@ -26,5 +26,8 @@ public class ProductoDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
+	
 	
 }

@@ -8,99 +8,99 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mercadona.springbootapp.controller.interfaces.IDestinoController;
-import mercadona.springbootapp.dto.AllDestinoResponse;
-import mercadona.springbootapp.dto.DestinoDTO;
+import mercadona.springbootapp.controller.interfaces.IDestinyController;
+import mercadona.springbootapp.dto.AllDestinyResponse;
+import mercadona.springbootapp.dto.DestinyDTO;
 import mercadona.springbootapp.exception.RestException;
-import mercadona.springbootapp.service.interfaces.IDestinoService;
+import mercadona.springbootapp.service.interfaces.IDestinyService;
 
 @RestController
-@RequestMapping("/destino")
-public class DestinoController implements IDestinoController {
+@RequestMapping("/destiny")
+public class DestinyController implements IDestinyController {
 	
-	private static Log log = LogFactory.getLog(DestinoController.class);
+	private static Log log = LogFactory.getLog(DestinyController.class);
 	
 	@Autowired
-	IDestinoService destinoService;
+	IDestinyService destinoService;
     
 	/**
-	 * Método para obtener All Destinos
+	 * Método para obtener All Destiny
 	 * 
 	 * @return code ResponseEntity<AllDestinoResponse>
 	 * @throws RestException 
 	 */
-    public ResponseEntity<AllDestinoResponse> getAllDestino(String token) throws RestException {
+    public ResponseEntity<AllDestinyResponse> getAllDestiny(String token) throws RestException {
     	
-    	log.info("Access to AllDestino controller");
+    	log.info("Access to AllDestiny controller");
       
     	long startTime = System.nanoTime();
       
-		ResponseEntity<AllDestinoResponse> response = null;
+		ResponseEntity<AllDestinyResponse> response = null;
 		
 		try {
 			
-			final AllDestinoResponse res = destinoService.getAllDestino();
+			final AllDestinyResponse res = destinoService.getAllDestiny();
 			
 			if (res != null) {
 				response = ResponseEntity.ok(res);
 				
 			} else {
-				log.error("No se ha podido obtener correctamente los datos del servicio REST AllDestino");
+				log.error("No se ha podido obtener correctamente los datos del servicio REST AllDestiny");
 				throw new RestException("No se ha podido encontrar Destinos", "500", HttpStatus.NOT_FOUND);
 			}
 			
 		} catch (Exception e) {
 			
-			log.error("No se ha podido obtener correctamente los datos del servicio REST AllDestino");
+			log.error("No se ha podido obtener correctamente los datos del servicio REST AllDestiny");
 			throw new RestException("No se ha podido encontrar Destinos", "500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime) / 1000000L;
 		
-		log.info("The request to AllDestinoResponse() took "
+		log.info("The request to getAllDestiny() took "
 				+ duration + " ms.");
 		return response;
 		
   }
     
 	/**
-	 * Método para obtener DestinoDTO  by codigo
+	 * Método para obtener DestinyDTO  by codigo
 	 * 
 	 * @param cod the cod
-	 * @return code ResponseEntity<DestinoDTO>
+	 * @return code ResponseEntity<DestinyDTO>
 	 * @throws RestException 
 	 */
-    public ResponseEntity<DestinoDTO> getDestinoByCod(String token, Integer cod) throws RestException {
+    public ResponseEntity<DestinyDTO> getDestinyByCod(String token, Integer cod) throws RestException {
     	
-    	log.info("Access to getDestinoByCod controller");
+    	log.info("Access to getDestinyByCod controller");
       
     	long startTime = System.nanoTime();
       
-		ResponseEntity<DestinoDTO> response = null;
+		ResponseEntity<DestinyDTO> response = null;
 		
 		try {
 			
-			final DestinoDTO res = destinoService.getDestinoByCod(cod);
+			final DestinyDTO res = destinoService.getDestinyByCod(cod);
 			
 			if (res != null) {
 				response = ResponseEntity.ok(res);
 				
 			} else {
-				log.error("No se ha podido obtener correctamente los datos del servicio REST getDestinoByCod");
+				log.error("No se ha podido obtener correctamente los datos del servicio REST getDestinyByCod");
 				throw new RestException("No se ha podido encontrar Destino para el valor indicado", "404", HttpStatus.NOT_FOUND);
 			}
 			
 		} catch (Exception e) {
 			
-			log.error("No se ha podido obtener correctamente los datos del servicio REST getDestinoByCod");
+			log.error("No se ha podido obtener correctamente los datos del servicio REST getDestinyByCod");
 			throw new RestException("No se ha podido encontrar Destino para el valor indicado", "500", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime) / 1000000L;
 		
-		log.info("The request to destinoByCod(" + cod + ") took "
+		log.info("The request to getDestinyByCod(" + cod + ") took "
 				+ duration + " ms.");
 		return response;
 		
@@ -109,28 +109,28 @@ public class DestinoController implements IDestinoController {
     /**
 	 * Método para crear entidad Destino
 	 * 
-	 * @param DestinoDTO the destino to create
+	 * @param DestinyDTO the destino to create
 	 * @return code ResponseEntity<DestinoDTO>
 	 * @throws RestException 
 	 */
     @Override
-    public ResponseEntity<DestinoDTO> createDestino(String token, DestinoDTO request) throws RestException {
+    public ResponseEntity<DestinyDTO> createDestiny(String token, DestinyDTO request) throws RestException {
     	
-    	log.info("Access to createDestino controller");
+    	log.info("Access to createDestiny controller");
       
     	long startTime = System.nanoTime();
       
-		ResponseEntity<DestinoDTO> response = null;
+		ResponseEntity<DestinyDTO> response = null;
 		
 		try {
 			
-			final DestinoDTO res = destinoService.createDestino(request);
+			final DestinyDTO res = destinoService.createDestiny(request);
 			
 			if (res != null) {
 				response = ResponseEntity.ok(res);
 				
 			} else {
-				log.error("No se ha podido obtener correctamente los datos del servicio REST createDestino");
+				log.error("No se ha podido obtener correctamente los datos del servicio REST createDestiny");
 				throw new RestException("No se ha podido crear Destino para el valor indicado", "404", HttpStatus.NOT_FOUND);
 			}
 			
@@ -143,7 +143,7 @@ public class DestinoController implements IDestinoController {
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime) / 1000000L;
 		
-		log.info("The request to createDestino(" + ") took "
+		log.info("The request to createDestiny(" + ") took "
 				+ duration + " ms.");
 		return response;
 		
@@ -152,41 +152,41 @@ public class DestinoController implements IDestinoController {
     /**
    	 * Método para actualizar una entidad Destino
    	 * 
-   	 * @param DestinoDTO the destino to create
+   	 * @param DestinyDTO the destino to create
    	 * @return code ResponseEntity<DestinoDTO>
    	 * @throws RestException 
    	 */
        @Override
-       public ResponseEntity<DestinoDTO> updateDestino(String token, DestinoDTO request) throws RestException {
+       public ResponseEntity<DestinyDTO> updateDestiny(String token, DestinyDTO request) throws RestException {
        	
        	log.info("Access to updateDestino controller");
          
        	long startTime = System.nanoTime();
          
-   		ResponseEntity<DestinoDTO> response = null;
+   		ResponseEntity<DestinyDTO> response = null;
    		
    		try {
    			
-   			final DestinoDTO res = destinoService.updateDestino(request);
+   			final DestinyDTO res = destinoService.updateDestiny(request);
    			
    			if (res != null) {
    				response = ResponseEntity.ok(res);
    				
    			} else {
-   				log.error("No se ha podido obtener correctamente los datos del servicio REST updateDestino");
+   				log.error("No se ha podido obtener correctamente los datos del servicio REST updateDestiny");
    				throw new RestException("No se ha podido encontrar Destino para el valor indicado", "404", HttpStatus.NOT_FOUND);
    			}
    			
    		} catch (Exception e) {
    			
-   			log.error("No se ha podido actualizar correctamente los datos del servicio REST updateDestino");
+   			log.error("No se ha podido actualizar correctamente los datos del servicio REST updateDestiny");
    			throw new RestException("No se ha podido encontrar Destino para el valor indicado", "500", HttpStatus.INTERNAL_SERVER_ERROR);
    		}
    		
    		long endTime = System.nanoTime();
    		long duration = (endTime - startTime) / 1000000L;
    		
-   		log.info("The request to updateDestino(" + ") took "
+   		log.info("The request to updateDestiny(" + ") took "
    				+ duration + " ms.");
    		return response;
    		
@@ -195,41 +195,41 @@ public class DestinoController implements IDestinoController {
        /**
       	 * Método para borrar una entidad Destino
       	 * 
-      	 * @param DestinoDTO the destino to create
+      	 * @param DestinyDTO the destino to create
       	 * @return code ResponseEntity<DestinoDTO>
       	 * @throws RestException 
       	 */
           @Override
-          public ResponseEntity<DestinoDTO> deleteDestino(String token, DestinoDTO request) throws RestException {
+          public ResponseEntity<DestinyDTO> deleteDestiny(String token, DestinyDTO request) throws RestException {
           	
-          	log.info("Access to deleteDestino controller");
+          	log.info("Access to deleteDestiny controller");
             
           	long startTime = System.nanoTime();
             
-      		ResponseEntity<DestinoDTO> response = null;
+      		ResponseEntity<DestinyDTO> response = null;
       		
       		try {
       			
-      			final DestinoDTO res = destinoService.deleteDestino(request);
+      			final DestinyDTO res = destinoService.deleteDestiny(request);
       			
       			if (res != null) {
       				response = ResponseEntity.ok(res);
       				
       			} else {
-      				log.error("No se ha podido borrar correctamente los datos del servicio REST deleteDestino");
+      				log.error("No se ha podido borrar correctamente los datos del servicio REST deleteDestiny");
       				throw new RestException("No se ha podido encontrar Destino para el valor indicado", "404", HttpStatus.NOT_FOUND);
       			}
       			
       		} catch (Exception e) {
       			
-      			log.error("No se ha podido borrar correctamente los datos del servicio REST deleteDestino");
+      			log.error("No se ha podido borrar correctamente los datos del servicio REST deleteDestiny");
       			throw new RestException("No se ha podido encontrar Destino para el valor indicado", "500", HttpStatus.INTERNAL_SERVER_ERROR);
       		}
       		
       		long endTime = System.nanoTime();
       		long duration = (endTime - startTime) / 1000000L;
       		
-      		log.info("The request to deleteDestino(" + ") took "
+      		log.info("The request to deleteDestiny(" + ") took "
       				+ duration + " ms.");
       		return response;
       		

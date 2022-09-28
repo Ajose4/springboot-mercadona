@@ -2,23 +2,23 @@ package mercadona.springbootapp.dto;
 
 import java.util.List;
 
-public class AllDestinoResponse {
+public class AllDestinyResponse {
 
 	/** destinos */
-	private List<DestinoDTO> destinos;
+	private List<DestinyDTO> destinos;
 	
 	/** numDestinos */
 	private Integer numDestinos;
 
-	public AllDestinoResponse() {
+	public AllDestinyResponse() {
 		super();
 	}
 
-	public List<DestinoDTO> getDestinos() {
+	public List<DestinyDTO> getDestinos() {
 		return destinos;
 	}
 
-	public void setDestinos(List<DestinoDTO> destinos) {
+	public void setDestinos(List<DestinyDTO> destinos) {
 		this.destinos = destinos;
 	}
 

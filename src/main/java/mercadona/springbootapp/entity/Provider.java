@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PRODUCTO")
-public class Producto {
-
+@Table(name = "PROVEEDOR")
+public class Provider {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -21,11 +21,11 @@ public class Producto {
 	@Column(name = "name", nullable = false)
     private String name;
 
-    public Producto() {
+    public Provider() {
     	super();
 	}
-	 
-    public Producto(long id, Integer cod, String name) {
+   
+    public Provider(long id, Integer cod, String name) {
         this.id = id;
         this.name = name;
         this.cod = cod;
@@ -42,17 +42,15 @@ public class Producto {
 	public String getName() {
         return name;
     }
-
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public void setCod(Integer cod) {
-		this.cod = cod;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public void setCod(Integer cod) {
+		this.cod = cod;
+	}
 }
