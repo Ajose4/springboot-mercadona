@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PRODUCTO")
+@Table(name = "PRODUCT")
 public class Product {
 
 	@Id
@@ -20,7 +20,10 @@ public class Product {
 	
 	@Column(name = "name", nullable = false)
     private String name;
-
+	
+	@Column(name = "description", nullable = true)
+    private String description;
+	
     public Product() {
     	super();
 	}
@@ -53,6 +56,14 @@ public class Product {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

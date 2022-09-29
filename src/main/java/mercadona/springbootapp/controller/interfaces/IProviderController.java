@@ -78,7 +78,7 @@ public interface IProviderController {
 	ResponseEntity<ProviderDTO> updateProvider(@RequestHeader("access-token") String token, 
 			@RequestBody ProviderDTO request) throws RestException;
 	
-	@Operation(summary = "deleteProvider", description = "Delete proveedor entity", tags={ "Proveedor" })
+	@Operation(summary = "deleteProvider", description = "Delete proveedor entity", tags={ "Provider" })
 	@ApiResponses(value = { 
 			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ProviderDTO.class))),
             

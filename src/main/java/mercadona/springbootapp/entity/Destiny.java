@@ -20,6 +20,15 @@ public class Destiny {
 	
 	@Column(name = "cod", nullable = false)
     private Integer cod;
+	
+	@Column(name = "address", nullable = false)
+    private String address;
+	
+	@Column(name = "city", nullable = false)
+    private String city;
+	
+	@Column(name = "postal_code", nullable = false)
+    private String postalCode;
 	 
     public Destiny() {
     	super();
@@ -54,5 +63,31 @@ public class Destiny {
 	public void setCod(Integer cod) {
 		this.cod = cod;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+	
+	
 
 }

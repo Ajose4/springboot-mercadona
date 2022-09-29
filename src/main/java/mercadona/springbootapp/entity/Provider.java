@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PROVEEDOR")
+@Table(name = "PROVIDER")
 public class Provider {
 	
 	@Id
@@ -20,6 +20,10 @@ public class Provider {
 	
 	@Column(name = "name", nullable = false)
     private String name;
+	
+	@Column(name = "email", nullable = true)
+    private String email;
+
 
     public Provider() {
     	super();
@@ -52,5 +56,13 @@ public class Provider {
 
 	public void setCod(Integer cod) {
 		this.cod = cod;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

@@ -5,14 +5,14 @@ public class DetailsByEANResponseDTO {
 	/** EAN */
 	private String EAN;
 	
-	/** destino */
-	private DestinyDTO destino;
+	/** destiny */
+	private DestinyDTO destiny;
 	
-	/** producto */
-	private ProductDTO producto;
+	/** product */
+	private ProductDTO product;
 	
-	/** proveedor */
-	private ProviderDTO proveedor;
+	/** provider */
+	private ProviderDTO provider;
 
 	public DetailsByEANResponseDTO() {
 		super();
@@ -26,28 +26,28 @@ public class DetailsByEANResponseDTO {
 		EAN = eAN;
 	}
 
-	public DestinyDTO getDestino() {
-		return destino;
+	public DestinyDTO getDestiny() {
+		return destiny;
 	}
 
-	public void setDestino(DestinyDTO destino) {
-		this.destino = destino;
+	public void setDestiny(DestinyDTO destiny) {
+		this.destiny = destiny;
 	}
 
-	public ProductDTO getProducto() {
-		return producto;
+	public ProductDTO getProduct() {
+		return product;
 	}
 
-	public void setProducto(ProductDTO producto) {
-		this.producto = producto;
+	public void setProduct(ProductDTO product) {
+		this.product = product;
 	}
 
-	public ProviderDTO getProveedor() {
-		return proveedor;
+	public ProviderDTO getProvider() {
+		return provider;
 	}
 
-	public void setProveedor(ProviderDTO proveedor) {
-		this.proveedor = proveedor;
+	public void setProvider(ProviderDTO provider) {
+		this.provider = provider;
 	}
 
 }
