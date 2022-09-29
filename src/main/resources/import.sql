@@ -11,3 +11,4 @@ INSERT INTO PROVIDER(id, cod, name, email) VALUES (1, 8437008, 'HACENDADO', 'pro
 INSERT INTO PROVIDER(id, cod, name, email) VALUES (2, 8480000, 'NESTLE', 'provider2@gmail.com');
 INSERT INTO PRODUCT(id, cod, name, description) VALUES (1, 45905, 'PAN_REBANADA', 'Lorem ipsum');
 INSERT INTO PRODUCT(id, cod, name, description) VALUES (2, 16007, 'FLAN', 'Lorem ipsum');
+INSERT INTO USER(id, username, password) VALUES (1, 'admin', 'admin');
