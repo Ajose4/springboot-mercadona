@@ -80,30 +80,30 @@ private static Log log = LogFactory.getLog(UtilsController.class);
 				throw new RestException("No existe producto con codigo: " + producto + " por favor, compruebe el número EAN introducido.", "500", HttpStatus.INTERNAL_SERVER_ERROR);
 			
 			} else {
-				res.setProducto(productoDto);
+				res.setProduct(productoDto);
 			}
 			
 			ProviderDTO proveedorDto = providerService.getProviderByCod(Integer.valueOf(proveedor));
 			
 			if( proveedorDto==null ) {
 				log.error("No existe producto con codigo: " + proveedor + " por favor, compruebe el número EAN introducido.");
-				throw new RestException("No existe producto con codigo: " + proveedor + " por favor, compruebe el número EAN introducido.", "500", HttpStatus.INTERNAL_SERVER_ERROR);
+				throw new RestException("No existe proveedor con codigo: " + proveedor + " por favor, compruebe el número EAN introducido.", "500", HttpStatus.INTERNAL_SERVER_ERROR);
 			
 			} else {
-				res.setProveedor(proveedorDto);
+				res.setProvider(proveedorDto);
 			}
 			
 			DestinyDTO destinoDto = destinyService.getDestinyByCod(Integer.valueOf(destino));
 			
 			if( destinoDto==null ) {
 				log.error("No existe producto con codigo: " + destino + " por favor, compruebe el número EAN introducido.");
-				throw new RestException("No existe producto con codigo: " + destino + " por favor, compruebe el número EAN introducido.", "500", HttpStatus.INTERNAL_SERVER_ERROR);
+				throw new RestException("No existe destino con codigo: " + destino + " por favor, compruebe el número EAN introducido.", "500", HttpStatus.INTERNAL_SERVER_ERROR);
 			
 			} else {
-				res.setDestino(destinoDto);
+				res.setDestiny(destinoDto);
 			}
 			
-			
+			res.setEAN(ean);
 			response = ResponseEntity.ok(res);
 			
 		} catch (Exception e) {

@@ -19,7 +19,7 @@ import mercadona.springbootapp.exception.RestException;
 
 public interface IDestinyController {
 	
-	@Operation(summary = "getDestinyByCod", description = "Get a destino by cod", tags={ "Destino" })
+	@Operation(summary = "getDestinyByCod", description = "Get a destino by cod", tags={ "Destiny" })
 	@ApiResponses(value = { 
 			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DestinyDTO.class))),
             
@@ -34,7 +34,7 @@ public interface IDestinyController {
 	ResponseEntity<DestinyDTO> getDestinyByCod(@RequestHeader("access-token") String token, 
 			@RequestParam(name = "cod", required = true) Integer cod) throws RestException;
 	
-	@Operation(summary = "getAllDestiny", description = "Get all destino", tags={ "Destino" })
+	@Operation(summary = "getAllDestiny", description = "Get all destino", tags={ "Destiny" })
 	@ApiResponses(value = { 
 			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = AllDestinyResponse.class))),
             
@@ -48,7 +48,7 @@ public interface IDestinyController {
 	@RequestMapping(value = { "/getAllDestiny" }, method = { RequestMethod.GET })
 	ResponseEntity<AllDestinyResponse> getAllDestiny(@RequestHeader("access-token") String token) throws RestException;
 	
-	@Operation(summary = "createDestiny", description = "Create a destino entity", tags={ "Destino" })
+	@Operation(summary = "createDestiny", description = "Create a destino entity", tags={ "Destiny" })
 	@ApiResponses(value = { 
 			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DestinyDTO.class))),
             
@@ -63,7 +63,7 @@ public interface IDestinyController {
 	ResponseEntity<DestinyDTO> createDestiny(@RequestHeader("access-token") String token, 
 			@RequestBody DestinyDTO request) throws RestException;
 	
-	@Operation(summary = "updateDestiny", description = "update destino entity", tags={ "Destino" })
+	@Operation(summary = "updateDestiny", description = "update destino entity", tags={ "Destiny" })
 	@ApiResponses(value = { 
 			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DestinyDTO.class))),
             
@@ -78,7 +78,7 @@ public interface IDestinyController {
 	ResponseEntity<DestinyDTO> updateDestiny(@RequestHeader("access-token") String token, 
 			@RequestBody DestinyDTO request) throws RestException;
 	
-	@Operation(summary = "deleteDestiny", description = "Delete destino entity", tags={ "Destino" })
+	@Operation(summary = "deleteDestiny", description = "Delete destino entity", tags={ "Destiny" })
 	@ApiResponses(value = { 
 			@ApiResponse(responseCode = "200", description = "Everything is ok", content = @Content(mediaType = "application/json", schema = @Schema(implementation = DestinyDTO.class))),
             
